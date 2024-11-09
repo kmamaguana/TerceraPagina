@@ -1,17 +1,14 @@
 <?php
-// Función para generar una sopa de letras de tamaño 10x10
-function generarSopaDeLetras($tamaño = 10) {
+function generarSopaDeLetras($tamaño = 15) {
     $letras = range('A', 'Z');
     $sopa = array_fill(0, $tamaño, array_fill(0, $tamaño, ''));
-
-    // Palabras a encontrar
     $palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL'];
 
     // Insertar palabras en la sopa
     foreach ($palabras as $palabra) {
         $insertado = false;
         while (!$insertado) {
-            $direccion = rand(0, 1);  // 0 = Horizontal, 1 = Vertical
+            $direccion = rand(0, 1);
             $fila = rand(0, $tamaño - 1);
             $columna = rand(0, $tamaño - 1);
             $longitud = strlen($palabra);
@@ -52,7 +49,6 @@ function generarSopaDeLetras($tamaño = 10) {
         }
     }
 
-    // Rellenar los espacios vacíos con letras aleatorias
     foreach ($sopa as &$fila) {
         foreach ($fila as &$celda) {
             if ($celda == '') {
@@ -64,7 +60,6 @@ function generarSopaDeLetras($tamaño = 10) {
     return $sopa;
 }
 
-// Llamamos a la función para generar la sopa
 $sopa = generarSopaDeLetras();
 ?>
 <!DOCTYPE html>
@@ -78,29 +73,35 @@ $sopa = generarSopaDeLetras();
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            background-image: url('img/fondo.jpg');
+            background-size: cover;
+            color: white;
         }
 
         .sopa {
+            width: 100%;
             display: grid;
-            grid-template-columns: repeat(10, 30px);
-            grid-gap: 5px;
+            grid-template-columns: repeat(15, 40px);
+            grid-gap: 7px;
             justify-content: center;
         }
 
         .celda {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            background-color: #f0f0f0;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
             cursor: pointer;
+            color: #333;
         }
 
         .celda.seleccionada {
-            background-color: #c0f0c0;
+            background-color: rgba(0, 128, 0, 0.7);
+            color: white;
         }
 
         .palabras {
@@ -109,8 +110,20 @@ $sopa = generarSopaDeLetras();
 
         .palabra {
             display: inline-block;
-            margin: 5px;
+            margin: 10px;
+            font-size: 20px;
             font-weight: bold;
+            background-color: #98c6b7; /* Fondo claro para las palabras */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        #winMessage {
+            display: none;
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50; /* Verde brillante para el mensaje de victoria */
         }
     </style>
 </head>
@@ -131,23 +144,62 @@ $sopa = generarSopaDeLetras();
     ?>
 </div>
 
-<!-- Palabras a buscar -->
+
 <div class="palabras">
-    <div class="palabra">PHP</div>
-    <div class="palabra">JAVA</div>
-    <div class="palabra">HTML</div>
-    <div class="palabra">CSS</div>
-    <div class="palabra">MYSQL</div>
+    <div class="palabra" id="PHP">PHP</div>
+    <div class="palabra" id="JAVA">JAVA</div>
+    <div class="palabra" id="HTML">HTML</div>
+    <div class="palabra" id="CSS">CSS</div>
+    <div class="palabra" id="MYSQL">MYSQL</div>
 </div>
 
-<!-- JavaScript para interactividad -->
+
+<div id="winMessage">¡Has encontrado todas las palabras!</div>
+
+
 <script>
     const celdas = document.querySelectorAll('.celda');
+    const palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL'];
+    let letrasSeleccionadas = {};
+
+    palabras.forEach(palabra => {
+        letrasSeleccionadas[palabra] = new Set();
+    });
+
     celdas.forEach(celda => {
         celda.addEventListener('click', () => {
             celda.classList.toggle('seleccionada');
+            verificarPalabra(celda);
         });
     });
+
+    function verificarPalabra(celda) {
+        const letra = celda.innerText;
+
+        // Revisar las palabras
+        palabras.forEach(palabra => {
+            if (celda.innerText === letra) {
+                letrasSeleccionadas[palabra].add(letra);
+                if (letrasSeleccionadas[palabra].size === palabra.length) {
+                    comprobarVictoria();
+                }
+            }
+        });
+    }
+
+    function comprobarVictoria() {
+
+        let palabrasEncontradas = 0;
+        palabras.forEach(palabra => {
+            if (letrasSeleccionadas[palabra].size === palabra.length) {
+                palabrasEncontradas++;
+            }
+        });
+
+        if (palabrasEncontradas === palabras.length) {
+            document.getElementById('winMessage').style.display = 'block';
+        }
+    }
 </script>
 
 </body>
