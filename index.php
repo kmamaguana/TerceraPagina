@@ -151,6 +151,7 @@ $sopa = generarSopaDeLetras();
     <div class="palabra" id="HTML">HTML</div>
     <div class="palabra" id="CSS">CSS</div>
     <div class="palabra" id="MYSQL">MYSQL</div>
+    <div class="palabra" id="KAREN">KAREN</div>
 </div>
 
 
@@ -159,7 +160,7 @@ $sopa = generarSopaDeLetras();
 
 <script>
     const celdas = document.querySelectorAll('.celda');
-    const palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL'];
+    const palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN'];
     let letrasSeleccionadas = {};
 
     palabras.forEach(palabra => {
