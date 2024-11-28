@@ -32,7 +32,7 @@ jobs:
   deploy:
     name: Deploy to EC2
     runs-on: ubuntu-latest
-    needs: build-and-push
+    needs: push
 
     steps:
     # 1. Conectar a EC2 y desplegar la aplicación
@@ -48,4 +48,11 @@ jobs:
           sudo yum update -y
           sudo yum install -y docker
           sudo service docker start
-          sudo usermod -a -G docker ec
+          sudo usermod -a -G docker ec2-user
+
+          # Descargar la imagen Docker desde DockerHub
+          docker pull kmamaguana/tercera-pagina:latest
+
+          # Detener cualquier contenedor existente y desplegar el nuevo
+          docker ps -q --filter "name=tercera-pagina" | grep -q . && docker stop tercera-pagina && docker rm tercera-pagina || true
+          docker run -d --name tercera-pagina -p 80:80 kmamaguana/tercera-pagina:latest
