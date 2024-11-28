@@ -51,8 +51,8 @@ jobs:
           sudo usermod -a -G docker ec2-user
 
           # Descargar la imagen Docker desde DockerHub
-          docker pull kmamaguana/tercera-pagina:latest
+          sudo docker pull kmamaguana/tercera-pagina:latest
 
           # Detener cualquier contenedor existente y desplegar el nuevo
-          docker ps -q --filter "name=tercera-pagina" | grep -q . && docker stop tercera-pagina && docker rm tercera-pagina || true
-          docker run -d --name tercera-pagina -p 80:80 kmamaguana/tercera-pagina:latest
+          sudo docker ps -q --filter "name=tercera-pagina" | grep -q . && docker stop tercera-pagina && docker rm tercera-pagina || true
+          sudo docker run -d --name tercera-pagina -p 80:80 kmamaguana/tercera-pagina:latest
