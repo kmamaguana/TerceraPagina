@@ -16,7 +16,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    # 2. Construir la imagen Docker
+    # 2. Construir la imagen Docker con la etiqueta correcta
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag kmamaguana/tercera-pagina:latest
 
