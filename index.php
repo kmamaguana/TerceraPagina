@@ -2,7 +2,7 @@
 function generarSopaDeLetras($tamaño = 15) {
     $letras = range('A', 'Z');
     $sopa = array_fill(0, $tamaño, array_fill(0, $tamaño, ''));
-    $palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL'];
+    $palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN'];
 
     // Insertar palabras en la sopa
     foreach ($palabras as $palabra) {
