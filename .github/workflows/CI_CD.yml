@@ -39,8 +39,9 @@ jobs:
         docker build . --file Dockerfile --tag kmamaguana/tercera-pagina:${{ env.version_tag }} --tag kmamaguana/tercera-pagina:latest 
         
         # Subir ambas etiquetas al DockerHub
-        docker push kmamaguana/tercera-pagina:latest
         docker push kmamaguana/tercera-pagina:${{ env.version_tag }}
+        docker push kmamaguana/tercera-pagina:latest
+        
 
   deploy:
     name: Deploy to EC2
