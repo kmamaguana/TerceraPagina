@@ -36,7 +36,7 @@ jobs:
     - name: Build and push Docker image
       run: |
         # Construir las imágenes con múltiples etiquetas
-        docker build . --file Dockerfile --tag kmamaguana/tercera-pagina:latest --tag kmamaguana/tercera-pagina:${{ env.version_tag }}
+        docker build . --file Dockerfile --tag kmamaguana/tercera-pagina:${{ env.version_tag }} --tag kmamaguana/tercera-pagina:latest 
         
         # Subir ambas etiquetas al DockerHub
         docker push kmamaguana/tercera-pagina:latest

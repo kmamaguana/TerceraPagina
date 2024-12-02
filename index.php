@@ -2,7 +2,7 @@
 function generarSopaDeLetras($tamaño = 15) {
     $letras = range('A', 'Z');
     $sopa = array_fill(0, $tamaño, array_fill(0, $tamaño, ''));
-    $palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN','MILENE'];
+    $palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN','MILENE','GATO'];
 
     // Insertar palabras en la sopa
     foreach ($palabras as $palabra) {
@@ -153,6 +153,7 @@ $sopa = generarSopaDeLetras();
     <div class="palabra" id="MYSQL">MYSQL</div>
     <div class="palabra" id="KAREN">KAREN</div>
     <div class="palabra" id="MILENE">MILENE</div>
+    <div class="palabra" id="GATO">GATO</div>
 </div>
 
 
@@ -161,7 +162,7 @@ $sopa = generarSopaDeLetras();
 
 <script>
     const celdas = document.querySelectorAll('.celda');
-    const palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN','MILENE'];
+    const palabras = ['PHP', 'JAVA', 'HTML', 'CSS', 'MYSQL','KAREN','MILENE','GATO'];
     let letrasSeleccionadas = {};
 
     palabras.forEach(palabra => {
